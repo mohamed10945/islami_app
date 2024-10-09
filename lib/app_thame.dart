@@ -16,6 +16,7 @@ class AppTheme {
       foregroundColor: black,
       titleTextStyle:
           TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: black),
+      elevation: 0,
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: lightPrimary,

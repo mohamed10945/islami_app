@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:islami_app/app_thame.dart';
 import 'package:islami_app/tabs/quran/quran_tab.dart';
+import 'package:islami_app/widgets/loading_indecator.dart';
 
-class SuraContentScreen extends StatelessWidget {
+class SuraContentScreen extends StatefulWidget {
   static const String routeName = "/sura_content";
+  const SuraContentScreen({super.key});
+
+  @override
+  State<SuraContentScreen> createState() => _SuraContentScreen();
+}
+
+class _SuraContentScreen extends State<SuraContentScreen> {
   late SuraContentScreenArgs args;
 
-  List<String> ayat = [
-    "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ ",
-    "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
-    " الرَّحْمَنِ الرَّحِيمِ",
-    " مَالِكِ يَوْمِ الدِّينِ",
-    " إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
-    " اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",
-    " صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّين"
-  ];
+  List<String> ayat = [];
 
   @override
   Widget build(BuildContext context) {
     args = ModalRoute.of(context)?.settings.arguments as SuraContentScreenArgs;
-    loadSuraFile();
+    if (ayat.isEmpty) loadSuraFile();
     return Container(
         decoration: BoxDecoration(
             image: DecorationImage(
@@ -28,7 +29,7 @@ class SuraContentScreen extends StatelessWidget {
         )),
         child: Scaffold(
           appBar: AppBar(
-            title: Text("الفاتحه"),
+            title: Text(args.suraName),
           ),
           body: Container(
             padding: EdgeInsets.all(24),
@@ -39,19 +40,25 @@ class SuraContentScreen extends StatelessWidget {
               color: AppTheme.white,
               borderRadius: BorderRadius.circular(25),
             ),
-            child: ListView.builder(
-              itemBuilder: (context, index) => Text(
-                ayat[index],
-                style: Theme.of(context).textTheme.headlineSmall,
-                textAlign: TextAlign.center,
-              ),
-              itemCount: ayat.length,
-            ),
+            child: ayat.isEmpty
+                ? LoaingIndecator()
+                : ListView.builder(
+                    itemBuilder: (context, index) => Text(
+                      ayat[index],
+                      style: Theme.of(context).textTheme.headlineSmall,
+                      textAlign: TextAlign.center,
+                    ),
+                    itemCount: ayat.length,
+                  ),
           ),
         ));
   }
 
-  void loadSuraFile() {
-    print(args.suraName);
+  Future<void> loadSuraFile() async {
+    String sura =
+        await rootBundle.loadString("assets/data/${args.suraNumber}.txt");
+    ayat = sura.split('\n');
+
+    setState(() {});
   }
 }
