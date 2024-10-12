@@ -243,6 +243,33 @@ class QuranTab extends StatelessWidget {
           'assets/images/qur2an_screen_logo.png',
           height: MediaQuery.sizeOf(context).height * 0.25,
         ),
+        Divider(
+          thickness: 2,
+          color: Theme.of(context).primaryColor,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Text(
+                "عدد الآيات",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Expanded(
+              child: Text(
+                'اسم السورة',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
+        Divider(
+          thickness: 2,
+          color: Theme.of(context).primaryColor,
+        ),
         Expanded(
           child: ListView.separated(
             padding: EdgeInsets.only(top: 16, bottom: 16),
@@ -254,18 +281,34 @@ class QuranTab extends StatelessWidget {
                   suraNumber: index + 1,
                 ),
               ),
-              child: Text(
-                suraNames[index],
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headlineSmall,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          (versesNumber[index]).toString(),
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          suraNames[index],
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
             itemCount: suraNames.length,
-            separatorBuilder: (context, index) => SizedBox(
-              height: 12,
-            ),
+            separatorBuilder: (context, index) => SizedBox(height: 12),
           ),
-        )
+        ),
       ],
     );
   }

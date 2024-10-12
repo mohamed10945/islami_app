@@ -23,25 +23,47 @@ class _HadethTabState extends State<HadethTab> {
           'assets/images/hadeth_logo.png',
           height: MediaQuery.sizeOf(context).height * 0.25,
         ),
-        Expanded(
-          child: ahadeth.isEmpty ? LoaingIndecator() : ListView.separated(
-            padding: EdgeInsets.only(top: 16, bottom: 16),
-            itemBuilder: (context, index) => InkWell(
-              onTap: () => Navigator.of(context).pushNamed(
-                HadethContentScreen.routeName,
-                arguments: ahadeth[index],
-              ),
+        Divider(
+          thickness: 2,
+          color: Theme.of(context).primaryColor,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
               child: Text(
-                ahadeth[index].title,
+                "الأحاديث",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),
-            itemCount: ahadeth.length,
-            separatorBuilder: (context, index) => SizedBox(
-              height: 12,
-            ),
-          ),
+          ],
+        ),
+        Divider(
+          thickness: 2,
+          color: Theme.of(context).primaryColor,
+        ),
+        Expanded(
+          child: ahadeth.isEmpty
+              ? LoaingIndecator()
+              : ListView.separated(
+                  padding: EdgeInsets.only(top: 16, bottom: 16),
+                  itemBuilder: (context, index) => InkWell(
+                    onTap: () => Navigator.of(context).pushNamed(
+                      HadethContentScreen.routeName,
+                      arguments: ahadeth[index],
+                    ),
+                    child: Text(
+                      ahadeth[index].title,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                  ),
+                  itemCount: ahadeth.length,
+                  separatorBuilder: (context, index) => SizedBox(
+                    height: 12,
+                  ),
+                ),
         )
       ],
     );
