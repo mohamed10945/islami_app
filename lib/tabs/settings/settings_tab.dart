@@ -13,8 +13,8 @@ class SettingsTab extends StatefulWidget {
 
 class _SettingsTabState extends State<SettingsTab> {
   List<Language> languages = [
-    Language(name: 'English', code: 'En'),
-    Language(name: 'العربية', code: 'Ar'),
+    Language(name: 'English', code: 'en'),
+    Language(name: 'العربية', code: 'ar'),
   ];
   @override
   Widget build(BuildContext context) {
@@ -51,12 +51,13 @@ class _SettingsTabState extends State<SettingsTab> {
                     ),
               ),
               DropdownButtonHideUnderline(
-                child: DropdownButton(
-                  value: languages.first.code,
+                child: DropdownButton<Language>(
+                  value: languages.firstWhere((languages) =>
+                      languages.code == settingsProvider.languageCode),
                   borderRadius: BorderRadius.circular(20),
                   items: languages
-                      .map((languages) => DropdownMenuItem(
-                            value: languages.code,
+                      .map((languages) => DropdownMenuItem<Language>(
+                            value: languages,
                             child: Text(languages.name,
                                 style:
                                     Theme.of(context).textTheme.headlineSmall),
@@ -64,7 +65,7 @@ class _SettingsTabState extends State<SettingsTab> {
                       .toList(),
                   onChanged: (selectedLanguage) {
                     if (selectedLanguage != null) {
-                      print(selectedLanguage);
+                      settingsProvider.ChangeLanguage(selectedLanguage.code);
                     }
                   },
                   dropdownColor: settingsProvider.isDark
