@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/app_thame.dart';
 import 'package:islami_app/tabs/settings/language.dart';
+import 'package:islami_app/tabs/settings/settings_Provider.dart';
+import 'package:provider/provider.dart';
 
 class SettingsTab extends StatefulWidget {
   const SettingsTab({super.key});
@@ -15,21 +18,25 @@ class _SettingsTabState extends State<SettingsTab> {
   ];
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
+
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "Dark Theme",
                 style: Theme.of(context)
                     .textTheme
-                    .titleLarge
+                    .headlineSmall
                     ?.copyWith(fontWeight: FontWeight.w500),
               ),
               Switch(
-                value: true,
-                onChanged: (value) {},
+                value: settingsProvider.themeMode == ThemeMode.dark,
+                onChanged: (isDark) => settingsProvider
+                    .changeThemeMode(isDark ? ThemeMode.dark : ThemeMode.light),
               )
             ],
           ),
@@ -39,7 +46,7 @@ class _SettingsTabState extends State<SettingsTab> {
             children: [
               Text(
                 'Languages',
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.w500,
                     ),
               ),
@@ -49,13 +56,20 @@ class _SettingsTabState extends State<SettingsTab> {
                   borderRadius: BorderRadius.circular(20),
                   items: languages
                       .map((languages) => DropdownMenuItem(
-                            child: Text(languages.name),
                             value: languages.code,
+                            child: Text(languages.name,
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall),
                           ))
                       .toList(),
-                  onChanged: (value) {
-                    print(value);
+                  onChanged: (selectedLanguage) {
+                    if (selectedLanguage != null) {
+                      print(selectedLanguage);
+                    }
                   },
+                  dropdownColor: settingsProvider.isDark
+                      ? AppTheme.darkPrimary
+                      : AppTheme.white,
                 ),
               ),
             ],

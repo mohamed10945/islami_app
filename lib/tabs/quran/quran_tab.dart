@@ -245,7 +245,7 @@ class QuranTab extends StatelessWidget {
         ),
         Divider(
           thickness: 2,
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).dividerColor,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -253,14 +253,14 @@ class QuranTab extends StatelessWidget {
             Expanded(
               child: Text(
                 "عدد الآيات",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.headlineLarge,
                 textAlign: TextAlign.center,
               ),
             ),
             Expanded(
               child: Text(
                 'اسم السورة',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.headlineLarge,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -268,7 +268,7 @@ class QuranTab extends StatelessWidget {
         ),
         Divider(
           thickness: 2,
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).dividerColor,
         ),
         Expanded(
           child: ListView.separated(
@@ -290,14 +290,14 @@ class QuranTab extends StatelessWidget {
                         child: Text(
                           (versesNumber[index]).toString(),
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.headlineSmall,
+                          style: Theme.of(context).textTheme.headlineLarge,
                         ),
                       ),
                       Expanded(
                         child: Text(
                           suraNames[index],
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.headlineSmall,
+                          style: Theme.of(context).textTheme.headlineLarge,
                         ),
                       ),
                     ],

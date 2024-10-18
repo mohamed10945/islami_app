@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:islami_app/tabs/settings/settings_Provider.dart';
+import 'package:provider/provider.dart';
 
 class SebhaTab extends StatefulWidget {
   const SebhaTab({super.key});
@@ -14,6 +16,7 @@ class _SebhaTabState extends State<SebhaTab> {
   int counter = 0;
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -24,24 +27,22 @@ class _SebhaTabState extends State<SebhaTab> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Image.asset(
-                  'assets/images/head_sebha_logo.png',
+                  'assets/images/${settingsProvider.SebhaHead}.png',
                 ),
                 GestureDetector(
                   onTap: _rotateImage,
                   child: Transform.rotate(
                     angle: _rotationAngle,
-                    child: Image.asset('assets/images/body_sebha_logo.png'),
+                    child: Image.asset(
+                        'assets/images/${settingsProvider.SebhaBody}.png'),
                   ),
                 ),
               ],
             ),
           ),
-          SizedBox(
-            height: 10,
-          ),
           Text(
             "عدد التسبيحات",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.headlineLarge,
             textAlign: TextAlign.center,
           ),
           Container(
@@ -54,7 +55,7 @@ class _SebhaTabState extends State<SebhaTab> {
             ),
             child: Text(
               counter.toString(),
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.normal),
+              style: Theme.of(context).textTheme.headlineLarge,
               textAlign: TextAlign.center,
             ),
           ),
@@ -63,9 +64,10 @@ class _SebhaTabState extends State<SebhaTab> {
             width: 173,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Theme.of(context).primaryColor,
-            ),
+                borderRadius: BorderRadius.circular(20),
+                color: settingsProvider.isDark
+                    ? Color(0xFFFACC1D)
+                    : Theme.of(context).primaryColor),
             child: Text(
               CurrentZeker(),
               style: TextStyle(
@@ -76,7 +78,7 @@ class _SebhaTabState extends State<SebhaTab> {
             ),
           ),
           SizedBox(
-            height: 50,
+            height: 20,
           )
         ],
       ),

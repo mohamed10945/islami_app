@@ -9,6 +9,7 @@ class AppTheme {
 
   static ThemeData lightTheme = ThemeData(
     primaryColor: lightPrimary,
+    dividerColor: lightPrimary,
     scaffoldBackgroundColor: Colors.transparent,
     appBarTheme: AppBarTheme(
       centerTitle: true,
@@ -25,13 +26,34 @@ class AppTheme {
       unselectedItemColor: white,
     ),
     textTheme: TextTheme(
-        headlineSmall:
-            TextStyle(fontSize: 25, fontWeight: FontWeight.w400, color: black),
         headlineLarge:
+            TextStyle(fontSize: 25, fontWeight: FontWeight.w400, color: black),
+        headlineSmall:
             TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: black)),
   );
 
   static ThemeData darkTheme = ThemeData(
     primaryColor: darkPrimary,
+    dividerColor: gold,
+    scaffoldBackgroundColor: Colors.transparent,
+    appBarTheme: AppBarTheme(
+      centerTitle: true,
+      backgroundColor: Colors.transparent,
+      foregroundColor: white,
+      titleTextStyle:
+          TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: white),
+      elevation: 0,
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: darkPrimary,
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: gold,
+      unselectedItemColor: white,
+    ),
+    textTheme: TextTheme(
+        headlineLarge:
+            TextStyle(fontSize: 25, fontWeight: FontWeight.w400, color: white),
+        headlineSmall:
+            TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: gold)),
   );
 }

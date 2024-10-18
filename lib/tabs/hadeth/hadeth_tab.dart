@@ -25,7 +25,7 @@ class _HadethTabState extends State<HadethTab> {
         ),
         Divider(
           thickness: 2,
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).dividerColor,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -33,7 +33,7 @@ class _HadethTabState extends State<HadethTab> {
             Expanded(
               child: Text(
                 "الأحاديث",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.headlineLarge,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -41,7 +41,7 @@ class _HadethTabState extends State<HadethTab> {
         ),
         Divider(
           thickness: 2,
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).dividerColor,
         ),
         Expanded(
           child: ahadeth.isEmpty
@@ -56,7 +56,7 @@ class _HadethTabState extends State<HadethTab> {
                     child: Text(
                       ahadeth[index].title,
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headlineSmall,
+                      style: Theme.of(context).textTheme.headlineLarge,
                     ),
                   ),
                   itemCount: ahadeth.length,
